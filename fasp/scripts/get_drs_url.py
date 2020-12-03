@@ -15,9 +15,9 @@ def main(argv):
 	print(gcp_project)
 	print(drs_id)
 
-	drsClient = anvilDRSClient(credentials_file, gcp_project, 'gs')
-	#url = drsClient.getAccessURL(drs_id)
-	url = drsClient.getObject(drs_id)
+	drsClient = anvilDRSClient(credentials_file, gcp_project, 's3')
+	url = drsClient.getAccessURL(drs_id)
+	#url = drsClient.getObject(drs_id)
 	print(url)
 
 
