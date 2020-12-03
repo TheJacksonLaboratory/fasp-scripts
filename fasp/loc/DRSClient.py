@@ -50,6 +50,7 @@ class DRSClient:
 			headers['Authorization'] = 'Bearer {0}'.format(self.access_token)
 		api_url = '{0}/ga4gh/drs/v1/objects/{1}/access/{2}'.format(self.api_url_base, object_id, access_id)
 		response = requests.get(api_url, headers=headers)
+		print(response.content)
 		if response.status_code == 200:
 			resp = response.content.decode('utf-8')
 			return json.loads(resp)['url']

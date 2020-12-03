@@ -18,13 +18,12 @@ def main(argv):
 
 	location = 'projects/{}/locations/{}'.format(settings['GCPProject'], settings['GCPPipelineRegion'])
 	gcsam = GCPLSsamtools(location, settings['GCPOutputBucket'])
-	wesClients = { 'samtoolsSBClient':samtoolsSBClient(sbSystem, sbProject),
-					'DNAStackWESClient':DNAStackWESClient('~/.keys/DNAStackWESkey.json'),
-					'GCPLSsamtools': gcsam}
+	wesClients = {'GCPLSsamtools': gcsam}
 	
 	for i, row in logTable.iterrows(): 
 		wesClientClassName = row["wesClient"]
 		run_id = row["pipeline_id"]
+		print(run_id)
 		if run_id == 'paste here':
 			logTable.at[i, 'status'] = 0
 		else:
