@@ -15,7 +15,7 @@ class localSearchClient:
 	
 	def __init__(self):
 		# edit the following for your local copy of the manifest file
-		with open('../data/gtex/gtex-cram-manifest.json') as f:
+		with open('/mnt/shared/gcp-user/session_data/manifest.json') as f:
 			self.data = json.load(f)
 			
 	def runQuery(self, query):
@@ -29,7 +29,7 @@ class localSearchClient:
 def main(argv):
 
 	# edit the following line for where you put your credentials file from anvil
-	credentials_file = '~/.keys/anvil_credentials.json'
+	credentials_file = '/mnt/shared/gcp-user/session_data/credentials.json'
 
 	faspRunner = FASPRunner(pauseSecs=0)
 	settings = faspRunner.settings
@@ -41,6 +41,8 @@ def main(argv):
 
 	drsClient = anvilDRSClient(credentials_file, settings['GCPProject'], 'gs')
 	location = 'projects/{}/locations/{}'.format(settings['GCPProject'], settings['GCPPipelineRegion'])
+	print(location)
+	print(settings['GCPOutputBucket'])
 	workflowClient = GCPLSsamtools(location, settings['GCPOutputBucket'], debug=True)
 
 	faspRunner.configure(searchClient, drsClient, workflowClient)
